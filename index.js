@@ -14,7 +14,7 @@ app.post('/chat', async (req, res) => {
         const userMessage = req.body.message;
 
         const response = await axios.post('https://api.together.xyz/v1/chat/completions', {   
-              model: "deepseek-ai/DeepSeek-R1",
+              model: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
               messages: [{role: "user", content: userMessage}]
             }, {
                 headers: {
@@ -29,7 +29,7 @@ app.post('/chat', async (req, res) => {
 
         
         const responseEmotion = await axios.post('https://api.together.xyz/v1/chat/completions', {   
-              model: "deepseek-ai/DeepSeek-R1",
+              model: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
               messages: [{role: "user", content: emotionPrompt}]
             }, {
                 headers: {
