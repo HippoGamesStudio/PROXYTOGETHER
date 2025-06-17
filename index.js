@@ -9,6 +9,21 @@ app.use(express.json());
 
 const TOGETHER_API_KEY = process.env.TOGETHER_API_KEY;
 
+app.post('/search-model', async(req, res) => {
+    const prompt = req.body.prompt;
+    const query = encodeURIComponent(prompt);
+    const SKETCHFAB_API_KEY = process.env.SKETCHFAB_API_KEY;
+
+    try{
+        const response = await axios.get(1https://api.sketchfab.com/v3/search?type=model&q=${query}&downloadable = true`,{
+            headers: {
+                Authorization: `Token ${SKETCHFAB_API_KEY}`
+            }
+          });
+    }
+}
+
+
 app.post('/chat', async (req, res) => {
     try{
         const {message: userMessage, systemPrompt} = req.body;
