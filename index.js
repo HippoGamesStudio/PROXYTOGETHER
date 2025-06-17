@@ -11,11 +11,17 @@ const TOGETHER_API_KEY = process.env.TOGETHER_API_KEY;
 
 app.post('/chat', async (req, res) => {
     try{
-        const userMessage = req.body.message;
+        const {message: userMessage, systemPrompt} = req.body;
+
+        const messages = []
+        if(systemPrompt && systemPrompt.trim()) {
+            messages.push({role: "system", content: systemPrompt});
+        }
+        messages.push({role: "user", content: userMessage}
 
         const response = await axios.post('https://api.together.xyz/v1/chat/completions', {   
               model: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
-              messages: [{role: "user", content: userMessage}]
+              messages
             }, {
                 headers: {
                     'Authorization': `Bearer ${TOGETHER_API_KEY}`,
