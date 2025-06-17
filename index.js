@@ -22,7 +22,7 @@ app.post('/search-model', async(req, res) => {
             }
         });
 
-        console.log("https://api.sketchfab.com/v3/search?type=model&q=${query}&downloadable=true")
+        console.log(`https://api.sketchfab.com/v3/search?type=model&q=${query}&downloadable=true`);
 
         const results = response.data.results;
         const firstGLB = results.find(m=>m.formats?.some(f=>f.format_type === "gltf"));
