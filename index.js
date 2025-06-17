@@ -11,7 +11,7 @@ const TOGETHER_API_KEY = process.env.TOGETHER_API_KEY;
 
 app.post('/search-model', async(req, res) => {
     const prompt = req.body.prompt;
-    const query = encodeURI(prompt);
+    const query = encodeURIComponent(prompt);
     const SKETCHFAB_API_KEY = process.env.SKETCHFAB_API_KEY;
 
     console.log(query);
