@@ -15,7 +15,8 @@ app.post('/search-model', async(req, res) => {
     const SKETCHFAB_API_KEY = process.env.SKETCHFAB_API_KEY;
 
     try{
-        const response = await axios.get(`https://api.sketchfab.com/v3/search?type=model&q=${query}&downloadable = true`,{
+        
+        const response = await axios.get(`https://sketchfab.com/search?q=${query}&type=models`,{
             headers: {
                 Authorization: `Token ${SKETCHFAB_API_KEY}`
             }
