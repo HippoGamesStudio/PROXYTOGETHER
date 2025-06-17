@@ -13,11 +13,11 @@ app.post('/chat', async (req, res) => {
     try{
         const {message: userMessage, systemPrompt} = req.body;
 
-        const messages = []
+        const messages = [];
         if(systemPrompt && systemPrompt.trim()) {
             messages.push({role: "system", content: systemPrompt});
         }
-        messages.push({role: "user", content: userMessage}
+        messages.push({role: "user", content: userMessage});
 
         const response = await axios.post('https://api.together.xyz/v1/chat/completions', {   
               model: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
