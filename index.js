@@ -29,7 +29,7 @@ app.post('/search-model', async(req, res) => {
         const gltfFormat = firstGLB.formats.find(f => f.format_type === "gltf");
         res.json({name: firstGLB.name, url:gltfFormat.url});
     }catch(err){
-        console.err(err.response?.data || err.message);
+        console.error(err.response?.data || err.message);
         res.status(500).json({error: 'Sketchfab error'});
     }
 });
