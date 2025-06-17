@@ -14,6 +14,8 @@ app.post('/search-model', async(req, res) => {
     const query = encodeURIComponent(prompt);
     const SKETCHFAB_API_KEY = process.env.SKETCHFAB_API_KEY;
 
+    console.log(query);
+
     try{
         
         const response = await axios.get(`https://api.sketchfab.com/v3/search?type=model&q=${query}&downloadable=true`,{
