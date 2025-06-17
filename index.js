@@ -15,13 +15,24 @@ app.post('/search-model', async(req, res) => {
     const SKETCHFAB_API_KEY = process.env.SKETCHFAB_API_KEY;
 
     try{
-        const response = await axios.get(1https://api.sketchfab.com/v3/search?type=model&q=${query}&downloadable = true`,{
+        const response = await axios.get(`https://api.sketchfab.com/v3/search?type=model&q=${query}&downloadable = true`,{
             headers: {
                 Authorization: `Token ${SKETCHFAB_API_KEY}`
             }
-          });
+        });
+
+        const results = response.data.results;
+        const firstGLB = results.find(m=>m.formats?.some(f=>f.format_type === "gltf"));
+
+        if(!firstGLB) return res.status(404).json({error: "No model found"});
+
+        const gltfFormat = firstGLB.formats.find(f => f.format_type === "gltf");
+        res.json({name: firstGLB.name, url:gltfFormat.url});
+    }catch(err){
+        console.err(err.response?.data || err.message);
+        res.status(500).json({error: 'Sketchfab error'});
     }
-}
+});
 
 
 app.post('/chat', async (req, res) => {
